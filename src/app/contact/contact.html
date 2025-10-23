@@ -1,0 +1,97 @@
+<div class="page-container">
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <h1>Get in Touch! 👋</h1>
+        <p class="subtitle">We'd love to hear from you and help make your calculations more fun!</p>
+    </div>
+
+    <div class="contact-container">
+        <!-- Contact Form Section -->
+        <div class="form-section">
+            <h2>Send Us a Message ✉️</h2>
+            
+            <!-- Success Message -->
+            <div class="success-message" *ngIf="submitted">
+                <i class="fas fa-check-circle"></i>
+                Message sent successfully! We'll get back to you soon! 🎉
+            </div>
+
+            <!-- Error Message -->
+            <div class="error-message" *ngIf="errorMessage">
+                {{ errorMessage }}
+            </div>
+
+            <form class="contact-form" (ngSubmit)="onSubmit()" [class.loading]="loading">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" [(ngModel)]="formData.name" name="name" 
+                           [class.invalid]="formData.name.length > 0 && formData.name.length < 2"
+                           placeholder="Your name">
+                    <small *ngIf="formData.name.length > 0 && formData.name.length < 2">
+                        Name must be at least 2 characters
+                    </small>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" [(ngModel)]="formData.email" name="email" 
+                           [class.invalid]="formData.email.length > 0 && !validateEmail(formData.email)"
+                           placeholder="your@email.com">
+                    <small *ngIf="formData.email.length > 0 && !validateEmail(formData.email)">
+                        Please enter a valid email
+                    </small>
+                </div>
+
+                <div class="form-group">
+                    <label for="subject">Subject</label>
+                    <input type="text" id="subject" [(ngModel)]="formData.subject" name="subject" 
+                           placeholder="What's this about?">
+                </div>
+
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" [(ngModel)]="formData.message" name="message" rows="5" 
+                              placeholder="Your message here..."></textarea>
+                </div>
+
+                <button type="submit" [disabled]="loading || !isFormValid()">
+                    <span *ngIf="!loading">Send Message</span>
+                    <span *ngIf="loading">Sending... 📨</span>
+                </button>
+            </form>
+        </div>
+
+        <!-- Contact Info Section -->
+        <div class="info-section">
+            <div class="contact-card">
+                <h3>Office Locations 🌍</h3>
+                <div class="location" *ngFor="let loc of locations">
+                    <h4>{{ loc.city }}</h4>
+                    <p><i class="fas fa-map-marker-alt"></i> {{ loc.address }}</p>
+                    <p><i class="fas fa-phone"></i> {{ loc.phone }}</p>
+                </div>
+            </div>
+
+            <div class="social-links">
+                <h3>Connect With Us 🤝</h3>
+                <div class="social-icons">
+                    <a *ngFor="let social of socialLinks" 
+                       [href]="social.url" 
+                       target="_blank"
+                       class="social-icon">
+                        <i [class]="social.icon"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- FAQ Section -->
+            <div class="faq-section">
+                <h3>Frequently Asked Questions ❓</h3>
+                <div class="faq-item" *ngFor="let faq of faqItems">
+                    <h4>{{ faq.question }}</h4>
+                    <p>{{ faq.answer }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

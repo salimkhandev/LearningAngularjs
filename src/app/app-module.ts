@@ -1,15 +1,24 @@
 import { NgModule, provideBrowserGlobalErrorListeners, provideZonelessChangeDetection } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
-
-import { AppRoutingModule } from './app-routing-module';
+import { RouterModule } from '@angular/router';
+import { About } from './about/about';
 import { App } from './app';
+import { AppRoutingModule } from './app-routing-module';
+import { Contact } from './contact/contact';
+import { Home } from './home/home';
 
 @NgModule({
   declarations: [
-    App
+    App,
+    Home,
+    About,
+    Contact,
   ],
   imports: [
     BrowserModule,
+    FormsModule,
+    RouterModule,
     AppRoutingModule
   ],
   providers: [
